@@ -1,0 +1,87 @@
+.skeleton-row {
+    animation: skeletonFadeIn 0.3s ease-out;
+  }
+  
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s infinite;
+    border-radius: 4px;
+  }
+  
+  .skeleton-text {
+    height: 16px;
+    margin: 2px 0;
+  }
+  
+  .skeleton-text--short {
+    width: 60px;
+  }
+  
+  .skeleton-text--medium {
+    width: 120px;
+  }
+  
+  .skeleton-text--long {
+    width: 180px;
+  }
+  
+  .skeleton-badge {
+    height: 24px;
+    width: 70px;
+    border-radius: 12px;
+  }
+  
+  .skeleton-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .skeleton-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+  
+  @keyframes skeletonShimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  @keyframes skeletonFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .skeleton-text--short {
+      width: 40px;
+    }
+  
+    .skeleton-text--medium {
+      width: 80px;
+    }
+  
+    .skeleton-text--long {
+      width: 120px;
+    }
+  
+    .skeleton-action-btn {
+      width: 28px;
+      height: 28px;
+    }
+  
+    .skeleton-actions {
+      gap: 4px;
+    }
+  }
+  

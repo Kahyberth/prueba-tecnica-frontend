@@ -1,0 +1,80 @@
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background-color: #f8f9fa;
+  }
+  
+  .action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .action-btn--edit {
+    color: #f57c00;
+    border-color: #fff3e0;
+  }
+  
+  .action-btn--edit:hover {
+    background-color: #fff3e0;
+    border-color: #f57c00;
+  }
+  
+  .action-btn--status {
+    color: #388e3c;
+    border-color: #e8f5e8;
+  }
+  
+  .action-btn--status:hover {
+    background-color: #e8f5e8;
+    border-color: #388e3c;
+  }
+  
+  .action-btn--delete {
+    color: #d32f2f;
+    border-color: #ffebee;
+  }
+  
+  .action-btn--delete:hover {
+    background-color: #ffebee;
+    border-color: #d32f2f;
+  }
+  
+  .action-btn--download {
+    color: #1976d2;
+    border-color: #e3f2fd;
+  }
+  
+  .action-btn--download:hover {
+    background-color: #e3f2fd;
+    border-color: #1976d2;
+  }
+  
+  @media (max-width: 768px) {
+    .action-buttons {
+      gap: 4px;
+    }
+  
+    .action-btn {
+      width: 28px;
+      height: 28px;
+    }
+  
+    .action-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  

@@ -1,0 +1,64 @@
+.create-form-page {
+    min-height: 100vh;
+    background-color: #e8eaf6;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-form-main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .form-container {
+    width: 100%;
+  }
+  
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .form-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a237e;
+    margin: 0;
+  }
+  
+  .edit-mode-btn {
+    background-color: #0066ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-mode-btn:hover {
+    background-color: #0052cc;
+  }
+  
+  @media (max-width: 768px) {
+    .create-form-main {
+      padding: 16px;
+    }
+  
+    .form-header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+  
+    .form-title {
+      font-size: 24px;
+    }
+  }
+  
