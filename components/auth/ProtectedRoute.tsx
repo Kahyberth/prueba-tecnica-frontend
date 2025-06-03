@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
+import Loader from '../Loader/Loader';
 import './ProtectedRoute.css';
 
 interface ProtectedRouteProps {
@@ -24,16 +25,7 @@ export default function ProtectedRoute({
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) {
-    return (
-      fallback || (
-        <div className="protected-route-loading">
-          <div className="loading-container">
-            <div className="spinner"></div>
-            <p>Verificando acceso...</p>
-          </div>
-        </div>
-      )
-    );
+    return fallback || <Loader message="Verificando acceso..." />;
   }
 
   if (!isAuthenticated || !user) {

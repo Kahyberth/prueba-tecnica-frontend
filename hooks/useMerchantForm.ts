@@ -79,7 +79,6 @@ export const useMerchantForm = (
   useEffect(() => {
     const loadDepartments = async () => {
       setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 500));
       try {
         const response = await merchantsApi.getDepartmentsAndCities();
         const validatedDepartments =

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Prueba Técnica App",
-  description: "Authentication system with Next.js and NestJS",
+  description: "Prueba técnica para OL Software desarrollada por Kahyberth Gonzalez",
 };
 
 export default function RootLayout({

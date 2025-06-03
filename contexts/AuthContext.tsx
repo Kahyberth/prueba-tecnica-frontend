@@ -73,32 +73,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const checkAuth = useCallback(async (): Promise<void> => {
-    if (typeof window !== "undefined") {
-      const currentPath = window.location.pathname;
-      const publicPages = ["/", "/login", "/unauthorized", "/register"];
-
-      if (publicPages.includes(currentPath)) {
-        dispatch({ type: "SET_LOADING", payload: false });
-        return;
-      }
-    }
-
     try {
       dispatch({ type: "SET_LOADING", payload: true });
-
-      await apiClient.get("/auth/verify-session");
 
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         const user = JSON.parse(storedUser);
         dispatch({ type: "SET_USER", payload: user });
-      } else {
-        dispatch({ type: "SET_AUTHENTICATED", payload: true });
-        dispatch({ type: "SET_LOADING", payload: false });
+        return;
       }
+
+      await apiClient.get("/auth/verify-session");
+      dispatch({ type: "SET_AUTHENTICATED", payload: true });
     } catch (error) {
       localStorage.removeItem("user");
       dispatch({ type: "LOGOUT" });
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
 

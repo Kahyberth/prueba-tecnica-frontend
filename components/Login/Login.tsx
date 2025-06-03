@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button"
 import "./Login.css"
 import FormInput from "@/components/Form/FormInput/FormInput"
 import { useAuth } from "@/contexts/AuthContext"
+import { useToast } from "@/contexts/ToastContext"
 
 const loginSchema = z.object({
   email: z
@@ -22,7 +23,6 @@ const loginSchema = z.object({
     .refine(val => val === true, "Debes aceptar los términos y condiciones")
 })
 
-
 const emailSchema = loginSchema.pick({ email: true })
 const passwordSchema = loginSchema.pick({ password: true })
 
@@ -35,6 +35,8 @@ export default function Login() {
   const [errors, setErrors] = useState<Partial<Record<keyof LoginFormData, string>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { login } = useAuth()
+  const { showSuccess, showError } = useToast()
+
   const validateField = (field: keyof LoginFormData, value: any) => {
     try {
       if (field === "email") {
@@ -79,26 +81,38 @@ export default function Login() {
       })
 
       await login(validatedData)
-    
+      let userFromStorage = null
+      if (typeof window !== 'undefined') {
+        const userStr = localStorage.getItem('user')
+        if (userStr) {
+          try {
+            userFromStorage = JSON.parse(userStr)
+          } catch {}
+        }
+      }
+      if (userFromStorage && userFromStorage.nombre && userFromStorage.rol) {
+        showSuccess(`Inicio de sesión exitoso: ${userFromStorage.nombre} (${userFromStorage.rol})`)
+      } else {
+        showSuccess("Inicio de sesión exitoso")
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: Partial<Record<keyof LoginFormData, string>> = {}
-        
         error.errors.forEach((err) => {
           if (err.path[0]) {
             const field = err.path[0] as keyof LoginFormData
             fieldErrors[field] = err.message
           }
         })
-    
         setErrors(fieldErrors)
-    
         const firstErrorField = Object.keys(fieldErrors)[0]
         if (firstErrorField) {
           const element = document.getElementById(firstErrorField)
           element?.focus()
           element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
+      } else {
+        showError("Credenciales inválidas")
       }
     } finally {
       setIsSubmitting(false)
@@ -108,11 +122,9 @@ export default function Login() {
   return (
     <div className="login-container">
       <h1 className="login-title">Debes iniciar sesión para acceder a la plataforma</h1>
-
       <p className="login-subtitle">
         Digita tu documento de identidad del propietario o representante legal y la contraseña
       </p>
-
       <form className="form-container" onSubmit={handleSubmit}>
         <FormInput 
           id="email" 
@@ -125,7 +137,6 @@ export default function Login() {
           error={errors.email}
           required
         />
-
         <FormInput 
           id="password" 
           label="Contraseña" 
@@ -137,7 +148,6 @@ export default function Login() {
           error={errors.password}
           required
         />
-
         <div>
           <Checkbox 
             id="terms" 
@@ -149,7 +159,6 @@ export default function Login() {
             <span className="error-message">{errors.terms}</span>
           )}
         </div>
-
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
         </Button>

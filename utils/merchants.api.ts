@@ -17,6 +17,7 @@ import {
   type Merchant,
   type MerchantTotals,
 } from "../schemas/merchant.schemas";
+import { DepartmentsCitiesResponseSchema, type DepartmentsCitiesResponse } from "../schemas/form.schemas";
 
 export const merchantsApi = {
   async getMerchants(
@@ -82,8 +83,11 @@ export const merchantsApi = {
     );
   },
 
-  async getDepartmentsAndCities(): Promise<any> {
-    return apiClient.get<any>("/merchants/departments-cities");
+  async getDepartmentsAndCities(): Promise<DepartmentsCitiesResponse> {
+    return apiClient.get<DepartmentsCitiesResponse>(
+      "/merchants/departments-cities",
+      DepartmentsCitiesResponseSchema
+    );
   },
 
   async exportMerchants(): Promise<Blob> {

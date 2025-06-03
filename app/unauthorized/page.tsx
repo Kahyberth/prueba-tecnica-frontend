@@ -38,11 +38,6 @@ export default function UnauthorizedPage() {
               <Home className="button-icon" />
               <span>Ir al Inicio</span>
             </button>
-
-            <button onClick={handleGoBack} className="secondary-button">
-              <ArrowLeft className="button-icon" />
-              <span>Volver Atrás</span>
-            </button>
           </div>
         </div>
 
