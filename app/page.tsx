@@ -32,10 +32,6 @@ export default function Home() {
           🔗 Backend
         </a>
       </div>
-      <p>
-        <strong>última actualización:</strong>
-        {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}
-      </p>
     </div>
   );
 }
